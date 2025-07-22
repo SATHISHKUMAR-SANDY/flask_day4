@@ -1,54 +1,58 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <title>Course Enrollment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .error { color: red; }
+    </style>
 </head>
 <body>
-    <h2>Enroll in a Course</h2>
+    <h2>Course Enrollment Form</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, msg in messages %}
-            <div class="flash {{ category }}">{{ msg }}</div>
+      {% if messages %}
+        {% for category, message in messages %}
+          <p style="color: green;">{{ message }}</p>
         {% endfor %}
+      {% endif %}
     {% endwith %}
 
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        <div class="form-group">
+        <p>
             {{ form.name.label }}<br>
-            {{ form.name(class_="input") }}
+            {{ form.name(size=32) }}<br>
             {% for error in form.name.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.email.label }}<br>
-            {{ form.email(class_="input") }}
+            {{ form.email(size=32) }}<br>
             {% for error in form.email.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.course.label }}<br>
-            {{ form.course(class_="input") }}
+            {{ form.course() }}<br>
             {% for error in form.course.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.age.label }}<br>
-            {{ form.age(class_="input") }}
+            {{ form.age() }}<br>
             {% for error in form.age.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <button type="submit">Enroll</button>
+        <p>{{ form.submit() }}</p>
     </form>
 </body>
 </html>

@@ -1,12 +1,12 @@
-from flask import Flask, render_template, redirect, url_for, flash
-from forms import EnrollmentForm
+from flask import Flask, render_template, redirect, flash, url_for
+from forms import CourseEnrollmentForm
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = 'your_secret_key'
 
 @app.route("/", methods=["GET", "POST"])
 def enroll():
-    form = EnrollmentForm()
+    form = CourseEnrollmentForm()
     if form.validate_on_submit():
         name = form.name.data
         course = form.course.data
