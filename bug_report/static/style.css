@@ -1,0 +1,19 @@
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.flash.success {
+    color: green;
+    font-weight: bold;
+}
+
+.flash.warning {
+    color: orange;
+    font-weight: bold;
+}
+
+.flash.danger {
+    color: red;
+    font-weight: bold;
+}

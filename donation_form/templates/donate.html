@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation Form</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .input { padding: 6px; width: 300px; }
+        .error { color: red; font-size: 14px; }
+        .flash.success { color: green; font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Make a Donation</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class_="input") }}
+            {% if form.name.errors %}
+                <div class="error">{{ form.name.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class_="input") }}
+            {% if form.email.errors %}
+                <div class="error">{{ form.email.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.amount.label }}<br>
+            {{ form.amount(class_="input") }}
+            {% if form.amount.errors %}
+                <div class="error">{{ form.amount.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.cause.label }}<br>
+            {{ form.cause(class_="input") }}
+            {% if form.cause.errors %}
+                <div class="error">{{ form.cause.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Donate</button>
+    </form>
+</body>
+</html>

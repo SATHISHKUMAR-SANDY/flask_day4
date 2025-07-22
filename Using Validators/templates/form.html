@@ -1,0 +1,58 @@
+<!-- templates/form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+</head>
+<body>
+    <form method="post">
+        {{ message.hidden_tag() }}
+
+        <p>{{ message.name.label }} {{ message.name }}
+        {% for error in message.name.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.email.label }} {{ message.email }}
+        {% for error in message.email.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.message.label }} {{ message.message }}
+        {% for error in message.message.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.gender.label }}</p>
+        {% for choice in message.gender %}
+            <p>{{ choice }} {{ choice.label }}</p>
+        {% endfor %}
+        {% for error in message.gender.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+
+        <p>{{ message.accept_term }} {{ message.accept_term.label }}
+        {% for error in message.accept_term.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.date.label }} {{ message.date }}
+        {% for error in message.date.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.age.label }} {{ message.age }}
+        {% for error in message.age.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        </p>
+
+        <p>{{ message.submit }}</p>
+    </form>
+</body>
+</html>

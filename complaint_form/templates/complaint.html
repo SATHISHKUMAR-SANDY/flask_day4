@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complaint Registration</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .input, textarea, select { padding: 6px; width: 300px; }
+        .errors { background: #ffe6e6; color: #cc0000; padding: 10px; border-radius: 5px; }
+        .flash.success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Complaint Registration Form</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% if form.errors %}
+      <div class="errors">
+        <ul>
+          {% for field, errors in form.errors.items() %}
+            {% for error in errors %}
+              <li>{{ field.capitalize() }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class_="input") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class_="input") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.category.label }}<br>
+            {{ form.category(class_="input") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.complaint.label }}<br>
+            {{ form.complaint(rows=5, class_="input") }}
+        </div>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+</body>
+</html>

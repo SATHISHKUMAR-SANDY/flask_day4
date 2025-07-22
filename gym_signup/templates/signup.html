@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gym Membership Signup</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .input { padding: 6px; width: 300px; }
+        .error { color: red; font-size: 14px; }
+        .flash.success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Sign up for Gym Membership</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class_="input") }}
+            {% if form.name.errors %}
+                <div class="error">{{ form.name.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.age.label }}<br>
+            {{ form.age(class_="input") }}
+            {% if form.age.errors %}
+                <div class="error">{{ form.age.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class_="input") }}
+            {% if form.email.errors %}
+                <div class="error">{{ form.email.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.plan.label }}<br>
+            {{ form.plan(class_="input") }}
+            {% if form.plan.errors %}
+                <div class="error">{{ form.plan.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.accept_terms() }} {{ form.accept_terms.label }}
+            {% if form.accept_terms.errors %}
+                <div class="error">{{ form.accept_terms.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Join Now</button>
+    </form>
+</body>
+</html>

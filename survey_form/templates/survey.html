@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Customer Survey</h2>
+
+    {% if form.errors %}
+        <div class="error-box">
+            <strong>Please correct the errors below:</strong>
+        </div>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.age.label }}<br>
+            {{ form.age(class_="input " + ("invalid" if form.age.errors else "")) }}
+            {% for error in form.age.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.gender.label }}<br>
+            {{ form.gender(class_="input " + ("invalid" if form.gender.errors else "")) }}
+            {% for error in form.gender.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.favorite_product.label }}<br>
+            {{ form.favorite_product(class_="input " + ("invalid" if form.favorite_product.errors else "")) }}
+            {% for error in form.favorite_product.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.feedback.label }}<br>
+            {{ form.feedback(class_="input " + ("invalid" if form.feedback.errors else "")) }}
+            {% for error in form.feedback.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Submit Survey</button>
+    </form>
+</body>
+</html>

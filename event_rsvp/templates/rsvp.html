@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RSVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Event RSVP</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class_="input") }}
+            {% for error in form.name.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class_="input") }}
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.will_attend() }} {{ form.will_attend.label }}
+            {% for error in form.will_attend.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Submit RSVP</button>
+    </form>
+</body>
+</html>

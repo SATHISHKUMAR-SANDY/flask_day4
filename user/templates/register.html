@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h2>User Registration Form</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group {% if form.full_name.errors %}error{% endif %}">
+            {{ form.full_name.label }}<br>
+            {{ form.full_name(size=32) }}<br>
+            {% for error in form.full_name.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {% if form.email.errors %}error{% endif %}">
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}<br>
+            {% for error in form.email.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {% if form.password.errors %}error{% endif %}">
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {% if form.confirm_password.errors %}error{% endif %}">
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}<br>
+            {% for error in form.confirm_password.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        {{ form.submit() }}
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.input {
+    padding: 6px;
+    width: 300px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.invalid {
+    border: 2px solid red;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.flash.success {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

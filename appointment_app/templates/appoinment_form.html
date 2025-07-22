@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Book Appointment</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class_="input") }}
+            {% for error in form.name.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class_="input") }}
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.date.label }}<br>
+            {{ form.date(class_="input", type="date") }}
+            {% for error in form.date.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.time.label }}<br>
+            {{ form.time(class_="input", type="time") }}
+            {% for error in form.time.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.purpose.label }}<br>
+            {{ form.purpose(class_="input", rows="3") }}
+            {% for error in form.purpose.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+</body>
+</html>

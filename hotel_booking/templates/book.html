@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Hotel Room Booking</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(class_="input " + ("invalid" if form.name.errors else "")) }}
+            {% for error in form.name.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class_="input " + ("invalid" if form.email.errors else "")) }}
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.room_type.label }}
+            {{ form.room_type(class_="input " + ("invalid" if form.room_type.errors else "")) }}
+            {% for error in form.room_type.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.nights.label }}
+            {{ form.nights(class_="input " + ("invalid" if form.nights.errors else "")) }}
+            {% for error in form.nights.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Confirm Booking</button>
+    </form>
+</body>
+</html>

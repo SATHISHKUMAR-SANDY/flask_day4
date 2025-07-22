@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Student Feedback Form</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(class_="input " + ("invalid" if form.name.errors else "")) }}
+            {% for error in form.name.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class_="input " + ("invalid" if form.email.errors else "")) }}
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.course.label }}
+            {{ form.course(class_="input " + ("invalid" if form.course.errors else "")) }}
+            {% for error in form.course.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.rating.label }}
+            {{ form.rating(class_="input " + ("invalid" if form.rating.errors else "")) }}
+            {% for error in form.rating.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.suggestion.label }}
+            {{ form.suggestion(class_="input") }}
+        </div>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+</body>
+</html>

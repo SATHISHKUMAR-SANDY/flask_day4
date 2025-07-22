@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Newsletter Subscription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Subscribe to Our Newsletter</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class="form-field") }}<br>
+            {% if form.name.errors %}
+                <span class="error">{{ form.name.errors[0] }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class="form-field") }}<br>
+            {% if form.email.errors %}
+                <span class="error">{{ form.email.errors[0] }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.frequency.label }}<br>
+            {{ form.frequency(class="form-field") }}<br>
+            {% if form.frequency.errors %}
+                <span class="error">{{ form.frequency.errors[0] }}</span>
+            {% endif %}
+        </div>
+
+        {{ form.submit(class="btn") }}
+    </form>
+</body>
+</html>

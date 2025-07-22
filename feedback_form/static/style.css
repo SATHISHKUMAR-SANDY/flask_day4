@@ -1,0 +1,28 @@
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+.form-errors {
+    background: #ffe0e0;
+    border: 1px solid red;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.9em;
+}
+
+.form-group.error input {
+    border: 2px solid red;
+}
+
+.flashes li.success {
+    color: green;
+}
+
+.flashes li.error {
+    color: red;
+}

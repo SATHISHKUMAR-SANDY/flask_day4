@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Flask Form</title>
+    <style>
+        .error { color: red; }
+        .input-error { border: 1px solid red; }
+    </style>
+</head>
+<body>
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    {% if error_count %}
+        <p class="error">{{ error_count }} error(s) found in the form.</p>
+    {% endif %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        {% for field in form %}
+            <p>
+                {{ field.label }}<br>
+                {{ field(class_='input-error' if field.errors else '') }}
+                {% for error in field.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </p>
+        {% endfor %}
+
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>
