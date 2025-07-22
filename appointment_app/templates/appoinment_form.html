@@ -1,62 +1,66 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Appointment Booking</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Book Appointment</title>
+    <style>
+        .error { color: red; }
+    </style>
 </head>
 <body>
-    <h2>Book Appointment</h2>
+    <h2>Appointment Booking Form</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, msg in messages %}
-            <div class="flash {{ category }}">{{ msg }}</div>
-        {% endfor %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
     {% endwith %}
 
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        <div class="form-group">
+        <p>
             {{ form.name.label }}<br>
-            {{ form.name(class_="input") }}
+            {{ form.name(size=32) }}<br>
             {% for error in form.name.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.email.label }}<br>
-            {{ form.email(class_="input") }}
+            {{ form.email(size=32) }}<br>
             {% for error in form.email.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.date.label }}<br>
-            {{ form.date(class_="input", type="date") }}
+            {{ form.date() }}<br>
             {% for error in form.date.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.time.label }}<br>
-            {{ form.time(class_="input", type="time") }}
+            {{ form.time() }}<br>
             {% for error in form.time.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <div class="form-group">
+        <p>
             {{ form.purpose.label }}<br>
-            {{ form.purpose(class_="input", rows="3") }}
+            {{ form.purpose(size=64) }}<br>
             {% for error in form.purpose.errors %}
-                <div class="error">{{ error }}</div>
+                <span class="error">{{ error }}</span>
             {% endfor %}
-        </div>
+        </p>
 
-        <button type="submit">Book Appointment</button>
+        <p>{{ form.submit() }}</p>
     </form>
 </body>
 </html>
